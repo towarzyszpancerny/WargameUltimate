@@ -1,55 +1,51 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>Mapa Świata 1936</title>
+    <style>
+        /* Domyślny wygląd mapy */
+        #map path {
+            fill: #d1dbdd; /* Kolor lądu */
+            stroke: #000;  /* Kolor granic */
+            stroke-width: 0.5px;
+            cursor: pointer;
+            transition: fill 0.2s;
+        }
 
-<style>
-  body {
-    background: #121212;
-    color: white;
-    font-family: Arial;
-    text-align: center;
-  }
-  svg {
-    width: 95%;
-    height: auto;
-  }
-  path {
-    fill: #444;
-    stroke: #000;
-    stroke-width: 0.5;
-    cursor: pointer;
-    transition: 0.2s;
-  }
-  .occupied {
-    fill: #c0392b;
-  }
-  .free {
-    fill: #27ae60;
-  }
-</style>
+        /* Klasa dla zaznaczonego kraju (czerwony) */
+        #map path.occupied {
+            fill: #ff0000 !important;
+        }
+
+        /* Podświetlenie po najechaniu myszką (opcjonalne) */
+        #map path:hover {
+            fill: #aaa;
+        }
+    </style>
 </head>
-
 <body>
-<h2>🌍 Mapa Świata – 1936</h2>
-<p>Kliknij państwo, aby zmienić status</p>
 
-<!-- PROSTA MAPA TESTOWA -->
-<svg viewBox="0 0 800 400">
-  <path id="GER" class="occupied" d="M300 150 h50 v40 h-50 z"/>
-  <path id="POL" class="free" d="M360 150 h50 v40 h-50 z"/>
-  <path id="FRA" class="free" d="M240 160 h50 v40 h-50 z"/>
-</svg>
+    <script>
+        // Prosty skrypt do zaznaczania
+        // W wersji finalnej możesz dodać sprawdzanie hasła, żeby tylko Ty mógł klikać
+        
+        const map = document.getElementById('map');
+        const paths = map.querySelectorAll('path');
 
-<script>
-document.querySelectorAll("path").forEach(country => {
-  country.addEventListener("click", () => {
-    country.classList.toggle("occupied");
-    country.classList.toggle("free");
-  });
-});
-</script>
+        // Ustawienie trybu: true = admin (może klikać), false = widz
+        const isAdmin = true; 
+
+        if (isAdmin) {
+            paths.forEach(path => {
+                path.addEventListener('click', function() {
+                    // Przełącz klasę 'occupied' (czerwony kolor)
+                    this.classList.toggle('occupied');
+                    
+                    // Tu możesz dodać kod zapisujący stan do bazy danych
+                    console.log("Kliknięto kraj ID:", this.id);
+                });
+            });
+        }
+    </script>
 
 </body>
 </html>
