@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Mapa Świata 1936</title>
+
+<style>
+  body {
+    background: #121212;
+    color: white;
+    font-family: Arial;
+    text-align: center;
+  }
+  svg {
+    width: 95%;
+    height: auto;
+  }
+  path {
+    fill: #444;
+    stroke: #000;
+    stroke-width: 0.5;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  .occupied {
+    fill: #c0392b;
+  }
+  .free {
+    fill: #27ae60;
+  }
+</style>
+</head>
+
+<body>
+<h2>🌍 Mapa Świata – 1936</h2>
+<p>Kliknij państwo, aby zmienić status</p>
+
+<!-- PROSTA MAPA TESTOWA -->
+<svg viewBox="0 0 800 400">
+  <path id="GER" class="occupied" d="M300 150 h50 v40 h-50 z"/>
+  <path id="POL" class="free" d="M360 150 h50 v40 h-50 z"/>
+  <path id="FRA" class="free" d="M240 160 h50 v40 h-50 z"/>
+</svg>
+
+<script>
+document.querySelectorAll("path").forEach(country => {
+  country.addEventListener("click", () => {
+    country.classList.toggle("occupied");
+    country.classList.toggle("free");
+  });
+});
+</script>
+
+</body>
+</html>
